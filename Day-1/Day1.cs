@@ -22,14 +22,12 @@ namespace adventofcode2022.Day_1
 
             var allCalories = new SortedSet<int>();
 
-
             var currentElfCalories = 0;
 
             foreach (var line in lines)
             {
                 if (string.IsNullOrEmpty(line))
                 {
-
                     allCalories.Add(currentElfCalories);
                     currentElfCalories = 0;
                     continue;
