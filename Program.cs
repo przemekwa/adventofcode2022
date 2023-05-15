@@ -2,6 +2,7 @@
 using adventofcode2022.Day_1;
 using adventofcode2022.Day_2;
 using adventofcode2022.Day_3;
+using System.Diagnostics;
 
 Console.WriteLine("Hello, adventofcode2022");
 
@@ -11,5 +12,17 @@ Console.WriteLine("Hello, adventofcode2022");
 //Console.WriteLine($"Day 2 * - {new Day2().CalculateStar()}");
 //Console.WriteLine($"Day 2 ** - {new Day2().CalculateSecondStar()}");
 
-Console.WriteLine($"Day 3 * - {new Day3().CalculateStar()}");
+
+var startWatch = new Stopwatch();
+
+//startWatch.Start();
+//Console.WriteLine($"Day 3 * - {new Day3().CalculateStar()}");
+//startWatch.Stop();
+//Console.WriteLine(TimeSpan.FromMicroseconds(startWatch.ElapsedMilliseconds));
+
+
+startWatch.Start();
 Console.WriteLine($"Day 3 ** - {new Day3().CalculateSecondStar()}");
+startWatch.Stop();
+Console.WriteLine(TimeSpan.FromMicroseconds(startWatch.ElapsedMilliseconds));
+

@@ -32,10 +32,64 @@ namespace adventofcode2022.Day_3
 
         public int CalculateSecondStar()
         {
+            var result = 0;
+
+            var lines = File.ReadAllLines("Day-3/puzzleInput.txt");
 
 
-            return 0;
-        }
+            var skip = 0;
+            var take = 3;
+
+            while (skip <= lines.Length)
+            {
+                var oneCompartment = lines.Skip(skip).Take(take).SelectMany(s => s);
+
+                var interLines = lines.Skip(skip).Take(take);
+
+                foreach (var singielChar in oneCompartment)
+                {
+                    var isMatch = ' ';
+                    foreach (var interLine in interLines)
+                    {
+                        if (interLine.Contains(singielChar))
+                        {
+                            isMatch = singielChar;
+                        }
+                        else
+                        {
+                            isMatch = ' ';
+                            break;
+                        }
+                    }
+
+                    if (isMatch != ' ')
+                    {
+                        if (az.ContainsKey(isMatch))
+                        {
+                            result += az[isMatch];
+                            break;
+                        }
+
+                        if (AZ.ContainsKey(isMatch))
+                        {
+                            result += AZ[isMatch];
+                            break;
+                        }
+                    }
+
+
+                }
+
+                skip += 3;
+                
+                
+            }
+
+
+            
+
+                return result;
+         }
 
         public int CalculateStar()
         {
