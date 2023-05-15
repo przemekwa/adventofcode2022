@@ -36,30 +36,27 @@ namespace adventofcode2022.Day_3
 
             var lines = File.ReadAllLines("Day-3/puzzleInput.txt");
 
-
             var skip = 0;
             var take = 3;
 
             while (skip <= lines.Length)
             {
-                var oneCompartment = lines.Skip(skip).Take(take).SelectMany(s => s);
+                var threeLines = lines.Skip(skip).Take(take);
 
-                var interLines = lines.Skip(skip).Take(take);
-
-                foreach (var singielChar in oneCompartment)
+                foreach (var oneCharOfAllCharIn3Lines in threeLines.SelectMany(s => s))
                 {
                     var isMatch = ' ';
-                    foreach (var interLine in interLines)
+
+                    foreach (var line in threeLines)
                     {
-                        if (interLine.Contains(singielChar))
+                        if (line.Contains(oneCharOfAllCharIn3Lines))
                         {
-                            isMatch = singielChar;
+                            isMatch = oneCharOfAllCharIn3Lines;
+                            continue;
                         }
-                        else
-                        {
-                            isMatch = ' ';
-                            break;
-                        }
+
+                        isMatch = ' ';
+                        break;
                     }
 
                     if (isMatch != ' ')
@@ -79,17 +76,10 @@ namespace adventofcode2022.Day_3
 
 
                 }
-
                 skip += 3;
-                
-                
             }
-
-
-            
-
-                return result;
-         }
+            return result;
+        }
 
         public int CalculateStar()
         {
@@ -98,7 +88,7 @@ namespace adventofcode2022.Day_3
             var lines = File.ReadAllLines("Day-3/puzzleInput.txt");
 
 
-            foreach (var line in lines.Select(s=> new { rucksack1 = s[..(s.Length / 2)], rucksack2 = s[((s.Length / 2))..] }))
+            foreach (var line in lines.Select(s => new { rucksack1 = s[..(s.Length / 2)], rucksack2 = s[((s.Length / 2))..] }))
             {
                 foreach (var ruckstackItem in line.rucksack1)
                 {
