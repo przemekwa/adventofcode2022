@@ -28,7 +28,13 @@ var startWatch = new Stopwatch();
 //Console.WriteLine(TimeSpan.FromMicroseconds(startWatch.ElapsedMilliseconds));
 
 
+//startWatch.Start();
+//Console.WriteLine($"Day 4 * - {new Day4().CalculateStar()}");
+//startWatch.Stop();
+//Console.WriteLine(TimeSpan.FromMicroseconds(startWatch.ElapsedMilliseconds));
+
 startWatch.Start();
-Console.WriteLine($"Day 4 * - {new Day4().CalculateStar()}");
+Console.WriteLine($"Day 4 ** - {new Day4().CalculateSecondStar()}");
 startWatch.Stop();
 Console.WriteLine(TimeSpan.FromMicroseconds(startWatch.ElapsedMilliseconds));
+

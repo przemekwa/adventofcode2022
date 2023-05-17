@@ -13,27 +13,41 @@ namespace adventofcode2022.Day_4
         {
             var lines = File.ReadAllLines("Day-4/puzzleInput.txt");
 
+            var result = 0;
             foreach (var item in lines
                 .Select(s => s.Split(','))
                 .Select(s => (s[0].Split('-'), s[1].Split('-')))
                 .Select((s) => new
                 {
                     FirstPair = (int.Parse(s.Item1[0]), int.Parse(s.Item1[1])),
-                    SecondPair= (int.Parse(s.Item2[0]), int.Parse(s.Item2[1])),
+                    SecondPair = (int.Parse(s.Item2[0]), int.Parse(s.Item2[1])),
 
                 }))
-                    
-                    
-            {
-                (var low1, var high1) = item.FirstPair;
-                (var low2, var high2) = item.SecondPair;
 
+
+            {
+                (var firstStart, var firstEnd) = item.FirstPair;
+                (var secondStart, var secondEnd) = item.SecondPair;
+
+                result++;
+
+                if (firstEnd < secondStart && firstEnd < secondEnd)
+                {
+                    result--;
+                    continue;
+                }
+
+                if (firstStart > secondEnd && firstEnd > secondEnd)
+                {
+                    result--;
+                    continue;
+                }
 
             }
 
 
 
-            return 0;
+            return result;
         }
 
         public int CalculateStar()
