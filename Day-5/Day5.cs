@@ -26,8 +26,8 @@ namespace adventofcode2022.Day_5
             foreach (var line in lines)
             {
                 var enumerable = Regex.Matches(line, "[0-9]+").Select((s) => int.Parse(s.Value));
-
                 craneMoves.Add(enumerable.ToList());
+
 
 
             }
