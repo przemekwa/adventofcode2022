@@ -8,11 +8,11 @@ namespace adventofcode2022.Day_1
 {
     internal class Day1 : ICalculateStars
     {
-        public int CalculateStar()
+        public string CalculateStar()
         {
             SortedSet<int> allCalories = GetCalories();
 
-            return allCalories.Last();
+            return allCalories.Last().ToString();
 
         }
 
@@ -39,11 +39,11 @@ namespace adventofcode2022.Day_1
             return allCalories;
         }
 
-        public int CalculateSecondStar()
+        public string CalculateSecondStar()
         {
             var allCalories = GetCalories().ToArray();
 
-            return allCalories[^1] + allCalories[^2] + allCalories[^3];
+            return (allCalories[^1] + allCalories[^2] + allCalories[^3]).ToString();
 
         }
     }

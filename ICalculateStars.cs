@@ -8,7 +8,7 @@ namespace adventofcode2022
 {
     internal interface ICalculateStars
     {
-        public int CalculateStar();
-        public int CalculateSecondStar();
+        public string CalculateStar();
+        public string CalculateSecondStar();
     }
 }

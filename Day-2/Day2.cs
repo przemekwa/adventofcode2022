@@ -9,7 +9,7 @@ namespace adventofcode2022.Day_2
 {
     internal class Day2 : ICalculateStars
     {
-        public int CalculateSecondStar()
+        public string CalculateSecondStar()
         {
             var wins = new Dictionary<string, int>
             {
@@ -87,10 +87,10 @@ namespace adventofcode2022.Day_2
 
             }
 
-            return result;
+            return result.ToString();
         }
 
-        public int CalculateStar()
+        public string CalculateStar()
         {
             var wins = new Dictionary<string, int>
             {
@@ -139,7 +139,7 @@ namespace adventofcode2022.Day_2
 
             }
 
-            return result;
+            return result.ToString()    ;
 
         }
     }

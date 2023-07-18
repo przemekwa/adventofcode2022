@@ -30,7 +30,7 @@ namespace adventofcode2022.Day_3
 
 
 
-        public int CalculateSecondStar()
+        public string CalculateSecondStar()
         {
             var result = 0;
 
@@ -78,10 +78,10 @@ namespace adventofcode2022.Day_3
                 }
                 skip += 3;
             }
-            return result;
+            return result.ToString();
         }
 
-        public int CalculateStar()
+        public string CalculateStar()
         {
             var result = 0;
 
@@ -112,7 +112,7 @@ namespace adventofcode2022.Day_3
 
 
 
-            return result;
+            return result.ToString()    ;
         }
     }
 }

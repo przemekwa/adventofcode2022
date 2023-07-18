@@ -9,7 +9,7 @@ namespace adventofcode2022.Day_4
 {
     internal class Day4 : ICalculateStars
     {
-        public int CalculateSecondStar()
+        public string CalculateSecondStar()
         {
             var lines = File.ReadAllLines("Day-4/puzzleInput.txt");
 
@@ -47,10 +47,10 @@ namespace adventofcode2022.Day_4
 
 
 
-            return result;
+            return result.ToString();
         }
 
-        public int CalculateStar()
+        public string CalculateStar()
         {
             var lines = File.ReadAllLines("Day-4/puzzleInput.txt");
 
@@ -88,7 +88,7 @@ namespace adventofcode2022.Day_4
 
 
 
-            return result ;
+            return result.ToString();
         }
     }
 }
