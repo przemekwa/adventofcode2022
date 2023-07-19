@@ -19,12 +19,13 @@ namespace adventofcode2022
 
             for (int i = 0; i < code.Length; i++)
             {
-                var isSame = new HashSet<char>();
-
-                isSame.Add(code[i]);
-                isSame.Add(code[i + 1]);
-                isSame.Add(code[i + 2]);
-                isSame.Add(code[i + 3]);
+                var isSame = new HashSet<char>
+                {
+                    code[i],
+                    code[i + 1],
+                    code[i + 2],
+                    code[i + 3]
+                };
 
                 if (isSame.Count != 4)
                 {
