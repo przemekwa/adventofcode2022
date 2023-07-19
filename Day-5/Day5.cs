@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace adventofcode2022.Day_5
+namespace adventofcode2022
 {
     internal class Day5 : ICalculateStars
     {
@@ -33,8 +33,10 @@ namespace adventofcode2022.Day_5
             
         };
 
-        public string CalculateSecondStar()
+        public string CalculateStar()
         {
+            return string.Empty;
+
             var lines = File.ReadAllLines("Day-5/puzzleInput.txt");
 
             var craneMoves = new List<List<int>>();
@@ -49,7 +51,7 @@ namespace adventofcode2022.Day_5
 
             foreach (var item in craneMoves)
             {
-                Move(item[0], item[1], item[2]);
+                MoveCrane9000(item[0], item[1], item[2]);
             }
 
 
@@ -63,18 +65,58 @@ namespace adventofcode2022.Day_5
             return result.ToString();
         }
 
-        private void Move(int amout, int from, int to)
+        private void MoveCrane9000(int amout, int from, int to)
         {
             for (int i = 0; i < amout; i++)
             {
                 var container = ship[from-1].Pop();
+
+
                 ship[to-1].Push(container);
             }
         }
 
-        public string CalculateStar()
+        public string CalculateSecondStar()
         {
-            return string.Empty;
-                }
+            var lines = File.ReadAllLines("Day-5/puzzleInput.txt");
+
+            var craneMoves = new List<List<int>>();
+
+            foreach (var line in lines)
+            {
+                var enumerable = Regex.Matches(line, "[0-9]+").Select((s) => int.Parse(s.Value));
+                craneMoves.Add(enumerable.ToList());
+            }
+
+            foreach (var item in craneMoves)
+            {
+                MoveCrane9001(item[0], item[1], item[2]);
+            }
+
+            var result = new StringBuilder();
+
+            foreach (var item in ship)
+            {
+                result.Append(item.Pop());
+            }
+
+            return result.ToString();
+        }
+
+        private void MoveCrane9001(int amout, int from, int to)
+        {
+            var tempStact = new Stack();
+            
+            for (int i = 0; i < amout; i++)
+            {
+                tempStact.Push(ship[from - 1].Pop());
+            }
+
+            for (int i = 0; i < amout; i++)
+            {
+                ship[to-1].Push(tempStact.Pop());
+            }
+
+        }
     }
 }

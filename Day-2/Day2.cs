@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace adventofcode2022.Day_2
+namespace adventofcode2022
 {
     internal class Day2 : ICalculateStars
     {
