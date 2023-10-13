@@ -29,7 +29,7 @@ namespace adventofcode2022
         {
             var lines = File.ReadAllLines("Day-7/puzzleInput.txt");
 
-            var currentPath = "P";
+            var currentPath = "P___111";
 
             var spaceList = new List<Space>();
 
@@ -44,11 +44,8 @@ namespace adventofcode2022
                         currentPath += "/" + l.Substring(5);
                         break;
                     case string l when Regex.Match(l, "^[0-9]+ ").Success:
-                      
                         int fileSize = int.Parse(l[..l.IndexOf(" ")]);
-                      
-                        var existSpace = spaceList.FirstOrDefault(s => s.Path == currentPath);
-                       
+                        var existSpace = spaceList.SingleOrDefault(s => s.Path == currentPath);
                         if (existSpace != null)
                         {
                             existSpace.Size += fileSize;
@@ -57,15 +54,22 @@ namespace adventofcode2022
                         {
                             spaceList.Add(new Space { Path = currentPath, Size = fileSize});
                         }
-                        
                         break;
                 }
-                    
             }
 
-            
+            var spaceListWithSizeSubSpace = new List<Space>();
 
-            return null;
+            foreach (var item in spaceList)
+            {
+                var newSize = spaceList.Where(s=>s.Path.Contains(item.Path)).Sum(s=>s.Size);
+                
+                spaceListWithSizeSubSpace.Add(new Space { Path = item.Path, Size = newSize });
+            }
+
+            var test = spaceList.Where(s => s.Path.Contains("nvmvghb"));
+
+            return spaceListWithSizeSubSpace.Where(s=>s.Size <= 100000).Sum(s=>s.Size).ToString();
         }
 
 
