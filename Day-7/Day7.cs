@@ -14,90 +14,50 @@ namespace adventofcode2022
 {
     internal class Day7 : ICalculateStars
     {
-        internal class Space
+        public class Space
         {
-            private int fileSize;
+            public string Path { get; set; }
+            public int Size { get; set; }
 
-            public int FileSize
+            public override string ToString()
             {
-                get { 
-                    
-                    
-                    return fileSize + Spaces.Sum(s=>s.FileSize);
-                
-                
-                }
-                set { fileSize = value; }
+                return Path; 
             }
-
-
-            private Space() { } 
-
-            public static Space Create(string name)
-            {
-                return new Space
-                {
-                    Name = name
-                };
-            }
-            public string Name { get; set; }
-
-            public List<Space> Spaces = new List<Space>();  
-
-            public Space Open(string name)
-            {
-                var space = Spaces.FirstOrDefault(s => s.Name.Equals(name));
-
-                space ??=  Space.Create(name);
-
-                return space;
-            }
-
-            public void AddFile(string file)
-            {
-                fileSize += int.Parse(file.Substring(1, file.IndexOf(" ")));
-            }
-
-            
         }
 
         public string CalculateStar()
         {
             var lines = File.ReadAllLines("Day-7/puzzleInput.txt");
 
-            var strucute = new Stack<Space>();
+            var currentPath = "P";
 
-
-            var currentSpace = Space.Create("/");
+            var spaceList = new List<Space>();
 
             foreach (string line in lines.Skip(1))
             {
                 switch (line)
                 {
-                    case string l when l.Contains("$ cd"):
-
+                    case string l when l.Contains(".."):
+                        currentPath =currentPath.Substring(0, currentPath.LastIndexOf('/'));
                         break;
-
+                    case string l when l.Contains("$ cd"):
+                        currentPath += "/" + l.Substring(5);
+                        break;
                     case string l when Regex.Match(l, "^[0-9]+ ").Success:
-                        currentSpace.AddFile(l);
-
+                        spaceList.Add(new Space { Path = currentPath });    
                         break;
                 }
                     
             }
 
-           
+            
 
-
-            return (result).ToString();
+            return null;
         }
 
 
         public string CalculateSecondStar()
         {
-           
-
-
             return (0).ToString();
         }
 
