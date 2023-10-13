@@ -21,7 +21,7 @@ namespace adventofcode2022
 
             public override string ToString()
             {
-                return Path; 
+                return Path + " " + Size;
             }
         }
 
@@ -44,7 +44,20 @@ namespace adventofcode2022
                         currentPath += "/" + l.Substring(5);
                         break;
                     case string l when Regex.Match(l, "^[0-9]+ ").Success:
-                        spaceList.Add(new Space { Path = currentPath });    
+                      
+                        int fileSize = int.Parse(l[..l.IndexOf(" ")]);
+                      
+                        var existSpace = spaceList.FirstOrDefault(s => s.Path == currentPath);
+                       
+                        if (existSpace != null)
+                        {
+                            existSpace.Size += fileSize;
+                        }
+                        else
+                        {
+                            spaceList.Add(new Space { Path = currentPath, Size = fileSize});
+                        }
+                        
                         break;
                 }
                     
