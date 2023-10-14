@@ -16,6 +16,7 @@ day = new Day4();
 day = new Day5();
 day = new Day6();
 day = new Day7();
+day = new Day8();
 
 
 

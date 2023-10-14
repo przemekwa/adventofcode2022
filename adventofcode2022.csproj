@@ -1,3 +1,5 @@
+﻿
+
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -11,6 +13,7 @@
     <None Remove="Day-5\puzzleInput.txt" />
     <None Remove="Day-7\puzzleInput.txt" />
     <None Remove="Day-6\puzzleInput.txt" />
+    <None Remove="Day-8\puzzleInput.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +24,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Day-6\puzzleInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day-8\puzzleInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
