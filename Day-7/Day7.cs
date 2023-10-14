@@ -29,7 +29,7 @@ namespace adventofcode2022
         {
             var lines = File.ReadAllLines("Day-7/puzzleInput.txt");
 
-            var currentPath = "P___111";
+            var currentPath = "G";
 
             var spaceList = new List<Space>();
 
@@ -42,6 +42,9 @@ namespace adventofcode2022
                         break;
                     case string l when l.Contains("$ cd"):
                         currentPath += "/" + l.Substring(5);
+                        spaceList.Add(new Space { Path = currentPath, Size = 0 });
+                        break;
+                    case string l when l.Contains("dir "):
                         break;
                     case string l when Regex.Match(l, "^[0-9]+ ").Success:
                         int fileSize = int.Parse(l[..l.IndexOf(" ")]);
@@ -60,16 +63,18 @@ namespace adventofcode2022
 
             var spaceListWithSizeSubSpace = new List<Space>();
 
+            var test = spaceList.Where(s => s.Path.Contains("jlcbpsr"));
+
             foreach (var item in spaceList)
             {
-                var newSize = spaceList.Where(s=>s.Path.Contains(item.Path)).Sum(s=>s.Size);
+                var newSize = spaceList.Where(s=>s.Path.Contains(item.Path, StringComparison.Ordinal)).Sum(s=>s.Size);
                 
                 spaceListWithSizeSubSpace.Add(new Space { Path = item.Path, Size = newSize });
             }
 
-            var test = spaceList.Where(s => s.Path.Contains("nvmvghb"));
+            var test2 = spaceListWithSizeSubSpace.Where(s => s.Path.Contains("jlcbpsr"));
 
-            return spaceListWithSizeSubSpace.Where(s=>s.Size <= 100000).Sum(s=>s.Size).ToString();
+            return spaceListWithSizeSubSpace.Where(s => s.Size <= 100000).Sum(s => s.Size).ToString();
         }
 
 
