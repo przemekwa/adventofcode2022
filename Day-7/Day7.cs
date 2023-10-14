@@ -14,6 +14,9 @@ namespace adventofcode2022
 {
     internal class Day7 : ICalculateStars
     {
+
+        private List<Space> _spaceList = new List<Space>();
+
         public class Space
         {
             public string Path { get; set; }
@@ -31,8 +34,6 @@ namespace adventofcode2022
 
             var currentPath = "G";
 
-            var spaceList = new List<Space>();
-
             foreach (string line in lines.Skip(1))
             {
                 switch (line)
@@ -42,20 +43,20 @@ namespace adventofcode2022
                         break;
                     case string l when l.Contains("$ cd"):
                         currentPath += "/" + l.Substring(5);
-                        spaceList.Add(new Space { Path = currentPath, Size = 0 });
+                        _spaceList.Add(new Space { Path = currentPath, Size = 0 });
                         break;
                     case string l when l.Contains("dir "):
                         break;
                     case string l when Regex.Match(l, "^[0-9]+ ").Success:
                         int fileSize = int.Parse(l[..l.IndexOf(" ")]);
-                        var existSpace = spaceList.SingleOrDefault(s => s.Path == currentPath);
+                        var existSpace = _spaceList.SingleOrDefault(s => s.Path == currentPath);
                         if (existSpace != null)
                         {
                             existSpace.Size += fileSize;
                         }
                         else
                         {
-                            spaceList.Add(new Space { Path = currentPath, Size = fileSize});
+                            _spaceList.Add(new Space { Path = currentPath, Size = fileSize});
                         }
                         break;
                 }
@@ -63,12 +64,14 @@ namespace adventofcode2022
 
             var spaceListWithSizeSubSpace = new List<Space>();
 
-            foreach (var item in spaceList)
+            foreach (var item in _spaceList)
             {
-                var newSize = spaceList.Where(s=>s.Path.Contains(item.Path, StringComparison.Ordinal)).Sum(s=>s.Size);
+                var newSize = _spaceList.Where(s=>s.Path.Contains(item.Path, StringComparison.Ordinal)).Sum(s=>s.Size);
                 
                 spaceListWithSizeSubSpace.Add(new Space { Path = item.Path, Size = newSize });
             }
+
+            _spaceList = spaceListWithSizeSubSpace;
 
             return spaceListWithSizeSubSpace.Where(s => s.Size <= 100000).Sum(s => s.Size).ToString();
         }
@@ -76,7 +79,11 @@ namespace adventofcode2022
 
         public string CalculateSecondStar()
         {
-            return (0).ToString();
+            var toDelete = 30_000_000 - (70_000_000 - _spaceList.First().Size);
+
+            var result = _spaceList.Where(s => s.Size >= toDelete).Select(s => s.Size).Order();
+
+            return (result.First()).ToString();
         }
 
         
