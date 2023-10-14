@@ -63,16 +63,12 @@ namespace adventofcode2022
 
             var spaceListWithSizeSubSpace = new List<Space>();
 
-            var test = spaceList.Where(s => s.Path.Contains("jlcbpsr"));
-
             foreach (var item in spaceList)
             {
                 var newSize = spaceList.Where(s=>s.Path.Contains(item.Path, StringComparison.Ordinal)).Sum(s=>s.Size);
                 
                 spaceListWithSizeSubSpace.Add(new Space { Path = item.Path, Size = newSize });
             }
-
-            var test2 = spaceListWithSizeSubSpace.Where(s => s.Path.Contains("jlcbpsr"));
 
             return spaceListWithSizeSubSpace.Where(s => s.Size <= 100000).Sum(s => s.Size).ToString();
         }
