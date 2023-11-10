@@ -8,48 +8,70 @@ namespace adventofcode2022
 {
     internal class Day8 : ICalculateStars
     {
+        private const int ArrayLenght = Lenght -1;
+        private const int Lenght = 99;
         private int[,] array;
 
-        public string CalculateSecondStar()
+        public string CalculateStar()
         {
             var lines = File.ReadAllLines("Day-8/puzzleInput.txt");
 
             int[,] array = new int[lines.First().Length, lines.Length];
 
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < 99; i++)
             {
-                for (int j = 0; j < lines[i].Length; j++)
+                for (int j = 0; j < 99; j++)
                 {
                     array[i, j] = int.Parse(lines[i][j].ToString());
                 }
             }
 
-            CheckArray(array);
+            var result = CheckArray(array);
 
 
-            return "";
+            return result.ToString();
         }
 
-        private void CheckArray(int[,] array)
+        private int CheckArray(int[,] array)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    //if (CheckTop(array[i, j], i, j, array))
-                    //{
-                    //    Console.WriteLine($"Top OK: {array[i,j]} ");
-                    //}
+            var result = 0;
 
-                    if (CheckDown(array[i, j], i, j, array))
+            for (int i = 0; i < Lenght; i++)
+            {
+                for (int j = 0; j < Lenght; j++)
+                {
+                    if (CheckTop(array[i, j], i, j, array)
+                        || CheckDown(array[i, j], i, j, array) 
+                        || CheckRight(array[i, j], i, j, array) 
+                        || CheckLeft(array[i, j], i, j, array))
                     {
-                        Console.WriteLine($"DOWN OK: {array[i, j]} ");
+                        result++;
                     }
 
+                    //if (CheckTop(array[i, j], i, j, array))
+                    //{
+                    //    Console.WriteLine($"Top OK: {array[i, j]} ");
+                    //}
 
+                    //if (CheckDown(array[i, j], i, j, array))
+                    //{
+                    //    Console.WriteLine($"Down OK: {array[i, j]} ");
+                    //}
+
+                    //if (CheckRight(array[i, j], i, j, array))
+                    //{
+                    //    Console.WriteLine($"Right OK: {array[i, j]} ");
+                    //}
+
+                    //if (CheckLeft(array[i, j], i, j, array))
+                    //{
+                    //    Console.WriteLine($"Left OK: {array[i, j]} ");
+                    //}
 
                 }
             }
+
+            return result;
         }
 
         private bool CheckTop(int toCheckPoint, int i, int j, int[,] array)
@@ -74,7 +96,7 @@ namespace adventofcode2022
         {
             var down = i + 1;
 
-            if (down > 4)
+            if (down > ArrayLenght)
             {
                 return true;
             }
@@ -88,7 +110,44 @@ namespace adventofcode2022
 
         }
 
-        public string CalculateStar()
+        private bool CheckRight(int toCheckPoint, int i, int j, int[,] array)
+        {
+            var right = j + 1;
+
+            if (right > ArrayLenght)
+            {
+                return true;
+            }
+
+            if (array[i, right] < toCheckPoint)
+            {
+                return CheckRight(toCheckPoint, i, right, array);
+            }
+
+            return false;
+
+        }
+
+        private bool CheckLeft(int toCheckPoint, int i, int j, int[,] array)
+        {
+            var right = j - 1;
+
+            if (right < 0)
+            {
+                return true;
+            }
+
+            if (array[i, right] < toCheckPoint)
+            {
+                return CheckLeft(toCheckPoint, i, right, array);
+            }
+
+            return false;
+
+        }
+
+
+        public string CalculateSecondStar()
         {
             return "";
         }
