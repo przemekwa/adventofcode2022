@@ -11,7 +11,7 @@ namespace adventofcode2022
         private const int ArrayLenght = Lenght -1;
         private const int Lenght = 99;
         private int[,] array;
-
+       
         public string CalculateStar()
         {
             var lines = File.ReadAllLines("Day-8/puzzleInput.txt");
